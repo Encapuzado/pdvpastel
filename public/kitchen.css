@@ -1,0 +1,403 @@
+:root {
+  --blue:#102542;
+  --pink:#ff4fa3;
+  --bg:#f9f5ec;
+  --card:#fffdf7;
+  --red:#d7263d;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:var(--bg);
+  font-family:system-ui,Segoe UI,Roboto,Arial;
+  padding-top:130px;
+}
+
+header{
+  position:fixed;top:0;left:0;right:0;
+  background:var(--blue);color:#fff;
+  padding:12px 16px;font-weight:800;z-index:10;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:8px;
+}
+
+#statusSummary{
+  width:100%;text-align:center;font-size:14px;
+  font-weight:600;color:#ffd;
+  background:rgba(255,255,255,0.08);
+  border-radius:6px;padding:4px;margin-top:4px;
+}
+
+main{max-width:1100px;margin:12px auto;padding:0 12px}
+
+/* === AGRUPAMENTO VISUAL DAS COMANDAS === */
+.order-group{
+  border-radius:16px;
+  margin-bottom:18px;
+  overflow:hidden;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
+  background:linear-gradient(180deg,#fdf7e9 0%,#fff 22%);
+}
+
+.order-group.local{
+  border:3px solid var(--blue);
+}
+
+.order-group.viagem{
+  border:3px solid #f59e0b;
+}
+
+.order-group.delivery{
+  border:3px solid var(--pink);
+}
+
+.order-head{
+  font-weight:700;
+  color:#fff;
+  padding:10px 12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:15px;
+  background:var(--blue);
+}
+
+.order-group.delivery .order-head{
+  background:var(--pink);
+}
+.order-group.viagem .order-head{
+  background:#f59e0b;
+}
+
+.group-actions{
+  display:flex;align-items:center;gap:6px;margin-left:12px;
+}
+
+.group-actions button{
+  border:0;border-radius:999px;padding:6px 10px;
+  font-weight:600;cursor:pointer;transition:.2s;
+  font-size:13px;
+}
+
+.group-actions button:hover{filter:brightness(.9);}
+.ga-cook{background:#ffe17a;}
+.ga-ready{background:#b0f3c2;}
+.ga-wait{background:#ffd8a8;}
+.ga-delivered{background:var(--pink);color:#fff;}
+
+/* rodapé da comanda */
+.order-group-footer{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px 12px 12px;
+  background:#f5efe2;
+  border-top:1px solid #e5e7eb;
+}
+.order-group-total{
+  font-weight:700;
+  font-size:14px;
+}
+.order-group-footer-buttons{
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+/* botão redondo de adicionar item */
+.round-add-btn{
+  width:44px;
+  height:44px;
+  border-radius:999px;
+  border:0;
+  background:var(--pink);
+  color:#fff;
+  font-size:26px;
+  line-height:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+  box-shadow:0 2px 4px rgba(0,0,0,.25);
+}
+.round-add-btn:hover{filter:brightness(.95);}
+
+/* botão fechar comanda */
+.close-order-btn{
+  border-radius:999px;
+  border:0;
+  padding:8px 14px;
+  background:#444;
+  color:#fff;
+  font-weight:600;
+  cursor:pointer;
+  font-size:13px;
+}
+
+/* grid de itens dentro da comanda */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:10px;
+  padding:10px;
+}
+
+/* === CARD DO ITEM === */
+.card{
+  border-radius:14px;padding:10px;background:var(--card);
+  box-shadow:0 1px 3px rgba(0,0,0,.08);
+  min-height:80px;
+}
+
+.card-bebidas{
+  background:#d7f1ff;
+}
+
+.s-cooking{background:#fff4d2;}
+.s-ready{background:#d5ffe2;}
+.s-queue{background:#fffbe9;}
+.s-delivered{background:#f1d0c8;opacity:.9;}
+
+.pulse{animation:pulse 1.5s infinite alternate;}
+@keyframes pulse{
+  from{box-shadow:0 0 0 rgba(0,0,0,0);}
+  to{box-shadow:0 0 10px rgba(0,0,0,0.2);}
+}
+
+.row{
+  display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;
+}
+
+.btn{
+  border:0;border-radius:999px;padding:7px 10px;
+  font-weight:700;cursor:pointer;transition:.2s;
+  font-size:13px;
+}
+.btn:hover{filter:brightness(.9)}
+
+.bDanger{background:var(--red);color:#fff;margin-left:auto;}
+
+.muted{color:#6b7280;font-size:12px}
+.ing{margin:4px 0;color:#111;font-size:13px;}
+
+.title-line{
+  display:flex;justify-content:space-between;align-items:center;gap:8px;
+}
+.title-name{font-weight:700;font-size:14px;}
+.title-type{font-size:12px;color:#555;}
+
+/* === SIDEBAR DE MONTAGEM === */
+.side-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.25);
+  opacity:0;
+  pointer-events:none;
+  transition:.2s;
+  z-index:20;
+}
+.side-overlay.visible{
+  opacity:1;
+  pointer-events:auto;
+}
+
+.side-panel{
+  position:fixed;
+  top:0;left:0;bottom:0;
+  width:420px;
+  max-width:90%;
+  background:#fffdf7;
+  box-shadow:2px 0 10px rgba(0,0,0,.35);
+  transform:translateX(-100%);
+  transition:.25s;
+  z-index:30;
+  display:flex;
+  flex-direction:column;
+}
+.side-panel.open{
+  transform:translateX(0);
+}
+
+.side-header{
+  padding:14px 16px;
+  background:var(--blue);
+  color:#fff;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-weight:700;
+}
+.side-header button{
+  background:transparent;
+  border:0;
+  color:#fff;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.side-body{
+  padding:12px 14px;
+  overflow-y:auto;
+}
+
+.sb-field{
+  margin-bottom:12px;
+}
+.sb-field label{
+  display:block;
+  font-size:13px;
+  font-weight:600;
+  margin-bottom:4px;
+  color:#444;
+}
+.sb-field input,
+.sb-field textarea{
+  width:100%;
+  padding:7px 9px;
+  border-radius:6px;
+  border:1px solid #d4d4d4;
+  font-size:14px;
+}
+
+/* contador de sabores */
+.sb-counter{
+  font-size:12px;
+  margin-bottom:6px;
+  color:#059669;
+}
+.sb-counter.over{
+  color:#b91c1c;
+}
+
+/* tabs (modo / tipo) */
+.sb-tabs{
+  display:flex;
+  gap:6px;
+  flex-wrap:wrap;
+}
+.sb-tab{
+  flex:1 1 auto;
+  padding:7px 9px;
+  font-size:12px;
+  border-radius:999px;
+  border:0;
+  background:#eee;
+  cursor:pointer;
+  text-align:center;
+}
+.sb-tab.active{
+  background:var(--pink);
+  color:#fff;
+}
+
+/* lista de chips verticais ocupando quase toda largura */
+.chips{
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+.chip{
+  width:100%;
+  padding:16px 12px;
+  border-radius:999px;
+  border:1px solid #d4d4d4;
+  font-size:15px;
+  cursor:pointer;
+  background:#fff;
+  text-align:center;
+}
+.chip.selected{
+  background:var(--pink);
+  border-color:var(--pink);
+  color:#fff;
+}
+.chip.limit-extra{
+  border-color:#dc2626;
+  box-shadow:0 0 0 2px #fecaca;
+}
+
+/* rodapé da sidebar */
+.sb-footer{
+  margin-top:14px;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+}
+.sb-footer button{
+  border-radius:999px;
+  padding:7px 12px;
+  border:0;
+  font-weight:600;
+  cursor:pointer;
+  font-size:13px;
+}
+.sb-footer .primary{
+  background:var(--blue);
+  color:#fff;
+}
+.sb-footer .ghost{
+  background:#eee;
+}
+
+/* === CARDS DE BEBIDAS NA SIDEBAR === */
+.bev-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+/* CARD DE BEBIDA: nome + controles (layout 1A) */
+.bev-card{
+  border-radius:12px;
+  border:1px solid #d4d4d4;
+  padding:10px 12px;
+  background:#f3f4ff;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+}
+
+.bev-name{
+  font-weight:600;
+  font-size:14px;
+  margin:0; /* tira o espaço embaixo para ficar na mesma linha */
+}
+
+/* linha de controles: [-] quantidade [+] preço */
+.bev-controls{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+
+.bev-qty{
+  font-weight:700;
+  font-size:16px;
+  min-width:24px;
+  text-align:center;
+}
+
+.bev-price{
+  font-size:13px;
+  color:#374151;
+}
+
+.bev-btn{
+  border-radius:999px;
+  border:0;
+  padding:4px 10px;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+.bev-btn-minus{
+  background:#fee2e2;
+}
+.bev-btn-plus{
+  background:#bbf7d0;
+}
+.bev-btn:active{
+  transform:scale(0.96);
+}
+

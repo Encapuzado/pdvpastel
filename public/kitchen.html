@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Fritô Pastel — Cozinha</title>
+
+
+<link rel="stylesheet" href="kitchen.css" />
+
+</head>
+<body>
+
+<header>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <span>Fritô Pastel — Cozinha (Firebase)</span>
+  </div>
+  <div id="statusSummary">Carregando pedidos...</div>
+</header>
+
+<main id="ordersContainer"></main>
+
+<div id="sideOverlay" class="side-overlay"></div>
+
+<div id="sidePanel" class="side-panel">
+  <div class="side-header">
+    <span id="sideTitle">Adicionar item</span>
+    <button id="sideCloseBtn">&times;</button>
+  </div>
+  <div class="side-body" id="sideBody"></div>
+</div>
+
+<script type="module" src="kitchen.js"></script>
+</body>
+</html>
